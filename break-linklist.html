@@ -1,0 +1,19 @@
+                        <div class="MegaMenu__Item MegaMenu__Item--fit">
+
+                          <ul class="Linklist">
+                            {%- for sub_link in link.links -%}
+                            {%assign split_position = forloop.index | modulo: 10 %}
+                            <li class="Linklist__Item">
+                              <a href="{{ sub_link.url }}" class="Link Link--secondary">{{ sub_link.title | escape }}</a>
+                            </li>
+                            {% if split_position  == 0 %}
+                            {% unless forloop.last  %}
+                          </ul>
+                          <ul class="Linklist">
+                            {% endunless %}
+                            {% endif %}
+
+                            {%- endfor -%}
+                          </ul>
+
+                        </div>
