@@ -1,0 +1,33 @@
+        <a href="#" id="Menubtn" class="js-menu-draw-toggle">
+        <img id="landingMenuImg" src="{{ 'menu.svg' | asset_url }}" alt="Menu" />
+      </a> 
+
+        <div class="js-landingmenu-draw"> 
+    <div id="landingmenu" class="hide" style="background-color:{{block.settings.box_menu_bg}}">
+      <ul>
+        {% for link in linklists[section.settings.home_linklist].links %}                                                            
+        {% capture child_list_handle %}{{ link.title | handleize }}{% endcapture %}
+        {% if linklists[child_list_handle].links != blank %}
+        <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+
+        {% for childlink in linklists[child_list_handle].links %}
+        <li class="childlink "><a class="childlink_{{ forloop.index }}" href="{{ childlink.url | escape }}">{{ childlink.title | escape }}</a></li>
+        {% endfor %}
+
+        {% else %}
+        <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+        {% endif %}        
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+   $('.js-menu-draw-toggle').click( function(){
+    $('#landingmenu').show("slide");
+  });
+
+  $(document).on('click mousedown touchstart ' ,function(event) {
+    if (!$(event.target).closest(".js-landingmenu-draw, .js-menu-draw-toggle").length) {
+      $("body").find("#landingmenu").hide("slide");
+    }
+  });
