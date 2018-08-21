@@ -1,0 +1,28 @@
+{%if product.metafields.product_size.title != blank %}
+<div class="size-help text-center"> 
+
+    <h2 class="title">{{ product.metafields.product_size.title}}</h2>
+    <div class="subtitle">
+      {{product.metafields.product_size.subtitle}}
+    </div>
+    <div class="size-help__content">
+      {% assign product_columns = product.metafields.product_columns %}
+      {% assign product_columns_size = product.metafields.product_columns.size | divided_by: 3 %}
+      {% for i in (1..product_columns_size) %}
+      {% capture image %}column_{{i}}_img{% endcapture%}
+      {% capture title %}column_{{i}}_title{% endcapture%}
+		{% capture subtitle %}column_{{i}}_subtitle{% endcapture%}
+      <div class="size-help__item">
+        {{  product_columns[image] | img_tag }}
+        <h5>{{ product_columns[title] }}</h5>
+        <div class="size-help__des">
+			{{ product_columns[subtitle] }}
+        </div>
+      </div>
+      {% endfor %}
+      
+
+    </div>
+  </div>
+
+{% endif %}
