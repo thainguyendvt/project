@@ -1,0 +1,21 @@
+<div class="product-single__quantity">
+                <label for="Quantity" class="product-single__quantity-label js-quantity-selector">Quantity</label>
+                <div class="quantity-wrapper">
+                <div class="quantity-icon qur-icon minuse"> - </div>
+                <input type="text" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
+                <div class="quantity-icon qur-icon plus"> + </div>
+                </div>
+              </div>
+              
+                $('body').on('click', '.qur-icon', function(){
+    var ip = parseInt($(this).parent().find('input').val());
+    if($(this).hasClass('plus')) {
+      ip = ip + 1;
+    } else {
+      ip = ip - 1;
+    }
+    if(ip==0) {
+      ip = 1;
+    }
+    $(this).parent().find('input').val(ip);
+  });
