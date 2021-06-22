@@ -1,0 +1,31 @@
+                  {%if block.settings.klaviyo_form_id != blank %}
+        <form id="email_signup" class="input-group klaviyo_condensed_embed_{{ block.settings.klaviyo_form_id }}" action="//manage.kmail-lists.com/subscriptions/subscribe" data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe" method="GET" target="_blank" novalidate="novalidate">
+         <div class="input-group">
+          <input type="hidden" name="g" value="{{ block.settings.klaviyo_form_id }}">
+          <input type="hidden" name="$fields" value="$consent">
+          <input type="hidden" name="$list_fields" value="$consent">
+            <input type="email" class="input-group-field" value="" name="email"  placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" />
+
+      <span class="input-group-btn">
+           <button type="submit" class="btn action_button sign_up" name="subscribe" id="">{% include "icon-arrow-right" %}</button>
+           </span>
+          </div>
+           <div class="klaviyo_messages">
+            <div class="success_message" style="display:none;"></div>
+            <div class="error_message" style="display:none;"></div>
+          </div>
+        </form>
+        
+        <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+        <script type="text/javascript">
+          KlaviyoSubscribe.attachToForms('#email_signup', {
+            hide_form_on_success: true,
+            extra_properties: {
+              $source: '$embed',
+              $method_type: "Klaviyo Form",
+              $method_id: 'embed',
+              $consent_version: 'Embed default text'
+            }
+          });
+        </script>
+        {%endif%}
